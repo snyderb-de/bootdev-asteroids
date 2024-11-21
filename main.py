@@ -51,6 +51,13 @@ def main():
         for sprite in draw_group:
             sprite.draw(screen)
         
+        #Check for collisions
+        for asteroid in asteroids_group:
+            if isinstance(asteroid, Asteroid) and player.check_collision(asteroid):
+                print("Game Over!")
+                pygame.quit()
+                return
+
         pygame.display.flip()
 
 
