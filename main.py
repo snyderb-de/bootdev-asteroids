@@ -51,6 +51,21 @@ def main():
         for sprite in update_group:
             sprite.update(dt) 
 
+        # Check for collisions between player and asteroids
+        for asteroid in asteroids_group:
+            if isinstance(asteroid, Asteroid) and player.check_collision(asteroid):
+                print("Game Over!")
+                pygame.quit()
+                return
+
+        # Check for collisions between asteroids and bullets
+        for asteroid in asteroids_group:
+            for shot in shots_group:
+                if isinstance(asteroid, Asteroid) and isinstance(shot, Shot) and asteroid.check_collision(shot):
+                    asteroid.kill()  # Remove the asteroid from the game
+                    shot.kill()  # Remove the shot from the game
+
+
         # Update all drawable objects
         for sprite in draw_group:
             sprite.draw(screen)
