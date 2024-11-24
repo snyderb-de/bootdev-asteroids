@@ -59,12 +59,12 @@ def main():
                 return
 
         # Check for collisions between asteroids and bullets
-        for asteroid in asteroids_group:
-            for shot in shots_group:
-                if isinstance(asteroid, Asteroid) and isinstance(shot, Shot) and asteroid.check_collision(shot):
+        for asteroid in list(asteroids_group):
+            for shot in list(shots_group):
+                if asteroid.check_collision(shot):
                     asteroid.split()  # Remove the asteroid from the game
                     shot.kill()  # Remove the shot from the game
-
+                    break
 
         # Update all drawable objects
         for sprite in draw_group:
